@@ -58,12 +58,12 @@ module PludoniRspec
   end
 
   def self.coverage!
-    if File.exists?('coverage/.resultset.json') && (
+    if File.exist?('coverage/.resultset.json') && (
         File.ctime('coverage/.resultset.json') < (Time.now - 900) ||
         (JSON.parse(File.read('coverage/.resultset.json')).keys.length > 4)
     )
       File.unlink('coverage/.resultset.json')
-      if File.exists?('coverage/.resultset.json.lock')
+      if File.exist?('coverage/.resultset.json.lock')
         File.unlink('coverage/.resultset.json.lock')
       end
     end
