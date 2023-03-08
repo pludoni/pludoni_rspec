@@ -1,3 +1,18 @@
+### 0.10
+
+- Optional Vite build before first system spec
+- Cuprite default
+- ViewComponent TestHelper inclusion
+- No rubocop
+- local! helper to connect via ssh portforwarding
+- screenshot full
+
+### 0.9
+
+- Gitlab artifacts integrated
+- apparition revived
+- Rubocop deps
+
 ### 0.5
 
 * [9937c05c9c] - Firefox added as test driver with geckodriver-helper (Stefan Wienert)
