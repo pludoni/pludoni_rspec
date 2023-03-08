@@ -22,7 +22,7 @@ module PludoniRspec::SystemTestChromeHelper
   end
 
   def screenshot(path = '1')
-    page.save_screenshot(Rails.root.join("public/screenshots/#{path}.png"))
+    page.save_screenshot(Rails.root.join("public/screenshots/#{path}.png"), full: true)
   end
 
   # skip any confirm: "Really delete?"
@@ -57,5 +57,18 @@ module PludoniRspec::SystemTestChromeHelper
     msg << ":\n#{last_exception.message}" if last_exception
 
     raise msg
+  end
+
+  def local!
+    uri = URI.parse(page.current_url)
+    puts "--- Connect with local browser:"
+    puts "  1. Open a SSH tunnel with port forwarding to the test server:"
+    puts "\nssh #{ENV['LOGNAME']}@pludoni.com -L 8080:localhost:#{uri.port}\n"
+    puts "  2. Open in Browser: "
+    uri.port = nil
+    uri.scheme = nil
+    uri.host = nil
+    puts "\nhttp://localhost:8080#{uri}\n"
+    puts "  Afterwards, you can close the SSH session"
   end
 end

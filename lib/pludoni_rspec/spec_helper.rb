@@ -15,6 +15,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.bisect_runner = :shell
   config.order = :defined
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.infer_spec_type_from_file_location!
@@ -28,6 +29,23 @@ RSpec.configure do |config|
   config.filter_gems_from_backtrace("fabrication")
   config.filter_gems_from_backtrace("grape")
   config.filter_gems_from_backtrace("rack")
+  if defined?(ViewComponent)
+    config.include ViewComponent::TestHelpers, type: :component
+    config.include Capybara::RSpecMatchers, type: :component
+  end
+  if defined?(ViteRuby)
+    # rubocop:disable Style/GlobalVars
+    config.before(:each, type: :system) do
+      unless $vite_build
+        puts "\e[31mPrecompiling Vite for system specs \e[0m"
+        bm = Benchmark.measure do
+          ViteRuby.commands.build
+        end
+        $vite_build = true
+        puts "\e[32m -> Vite build done in #{bm.real.round(2)} \e[0m"
+      end
+    end
+  end
 
   config.around(:each, :timeout) do |example|
     time = 10 unless time.kind_of?(Numeric)

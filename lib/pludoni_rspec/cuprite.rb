@@ -1,16 +1,24 @@
 require "capybara"
+require 'capybara/cuprite'
 require "headless"
 require "puma"
 require 'pludoni_rspec/system_test_chrome_helper'
 
-require 'capybara/apparition'
-Capybara.register_driver :apparition_debug do |app|
-  Capybara::Apparition::Driver.new(app, js_errors: true, browser_options: { 'no-sandbox' => true })
+Capybara.register_driver(:cuprite) do |app|
+  options = {}
+  if ENV['CI']
+    options['no-sandbox'] = nil
+  end
+  Capybara::Cuprite::Driver.new(app,
+    window_size: [1200, 800],
+    browser_options: options,
+    js_errors: true,
+    timeout: 20,
+    process_timeout: 15,
+    inspector: ENV['INSPECTOR']
+  )
 end
-Capybara.register_driver :apparition do |app|
-  Capybara::Apparition::Driver.new(app, PludoniRspec::Config.apparition_arguments)
-end
-Capybara.javascript_driver = :apparition
+Capybara.javascript_driver = :cuprite
 
 RSpec.configure do |c|
   c.include PludoniRspec::SystemTestChromeHelper, type: :feature
@@ -21,7 +29,7 @@ RSpec.configure do |c|
   end
   c.before(:each, type: :system) do
     if defined?(driven_by)
-      driven_by :apparition
+      driven_by :cuprite
     end
   end
   c.around(:example, js: true) do |ex|
