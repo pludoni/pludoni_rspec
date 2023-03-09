@@ -4,7 +4,7 @@ require "headless"
 require "puma"
 require 'pludoni_rspec/system_test_chrome_helper'
 
-Capybara.register_driver(:cuprite) do |app|
+Capybara.register_driver(:cuprite_pl) do |app|
   options = {}
   if ENV['CI']
     options['no-sandbox'] = nil
@@ -18,7 +18,8 @@ Capybara.register_driver(:cuprite) do |app|
     inspector: ENV['INSPECTOR']
   )
 end
-Capybara.javascript_driver = :cuprite
+Capybara.javascript_driver = :cuprite_pl
+Capybara.current_driver = :cuprite_pl
 
 RSpec.configure do |c|
   c.include PludoniRspec::SystemTestChromeHelper, type: :feature
@@ -29,7 +30,7 @@ RSpec.configure do |c|
   end
   c.before(:each, type: :system) do
     if defined?(driven_by)
-      driven_by :cuprite
+      driven_by :cuprite_pl
     end
   end
   c.around(:example, js: true) do |ex|
