@@ -7,7 +7,11 @@ RSpec.configure do |config|
   config.before do
     I18n.locale = I18n.default_locale
     if defined?(Fabrication)
-      Fabrication::Sequencer.reset
+      if Fabrication::Sequencer.respond_to?(:clear)
+        Fabrication::Sequencer.clear
+      else
+        Fabrication::Sequencer.reset
+      end
     end
   end
 
