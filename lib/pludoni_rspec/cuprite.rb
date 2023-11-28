@@ -13,6 +13,7 @@ Capybara.register_driver(:cuprite_pl) do |app|
     window_size: [1200, 800],
     browser_options: options,
     js_errors: true,
+    env: { "LD_PRELOAD" => "" },
     timeout: 20,
     process_timeout: 15,
     inspector: ENV['INSPECTOR']
