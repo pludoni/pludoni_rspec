@@ -9,16 +9,18 @@ module PludoniRspec
       attr_accessor :wrap_js_spec_in_headless
       attr_accessor :chrome_arguments
       attr_accessor :capybara_timeout
+      attr_accessor :coverage_enabled
     end
     # self.chrome_driver_version = "2.36"
     self.destroy_headless = false
     self.wrap_js_spec_in_headless = RbConfig::CONFIG['host_os']['linux']
     # self.chrome_arguments = ['headless', 'disable-gpu', "window-size=1600,1200", 'no-sandbox', 'disable-dev-shm-usage', 'lang=de']
     self.capybara_timeout = ENV['CI'] == '1' ? 30 : 5
+    self.coverage_enabled = true
   end
   def self.run
     ENV["RAILS_ENV"] ||= 'test'
-    coverage!
+    coverage! if Config.coverage_enabled
     require 'pry'
     require File.expand_path("config/environment", Dir.pwd)
     abort("The Rails environment is running in production mode!") if Rails.env.production?

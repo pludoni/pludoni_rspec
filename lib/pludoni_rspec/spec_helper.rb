@@ -21,7 +21,11 @@ RSpec.configure do |config|
 
   config.bisect_runner = :shell
   config.order = :defined
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  if Rails.version.to_f >= 7.1
+    config.fixture_paths << "#{::Rails.root}/spec/fixtures"
+  else
+    config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  end
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = true
   if defined?(ActionMailer::Base)
