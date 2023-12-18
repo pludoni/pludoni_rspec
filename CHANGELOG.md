@@ -1,3 +1,10 @@
+### 0.11
+
+- Rails 7.1 fixture_paths deprecation
+- Cuprite with ``LD_PRELOAD => ""`` to fix jmalloc errors
+- Added ``PludoniRspec.coverage_enabled`` to make it possible to disable coverage
+- Support Fabrication Gem versions
+
 ### 0.10
 
 - Optional Vite build before first system spec
