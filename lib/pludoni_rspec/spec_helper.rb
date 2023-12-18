@@ -22,6 +22,7 @@ RSpec.configure do |config|
   config.bisect_runner = :shell
   config.order = :defined
   if Rails.version.to_f >= 7.1
+    config.fixture_paths ||= []
     config.fixture_paths << "#{::Rails.root}/spec/fixtures"
   else
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
