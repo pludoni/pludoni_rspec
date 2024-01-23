@@ -9,6 +9,7 @@ Capybara.register_driver(:cuprite_pl) do |app|
   if ENV['CI']
     options['no-sandbox'] = nil
   end
+  options['disable-smooth-scrolling'] = true
   Capybara::Cuprite::Driver.new(app,
     window_size: [1200, 800],
     browser_options: options,
