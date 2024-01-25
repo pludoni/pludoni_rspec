@@ -3,7 +3,7 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
-  config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: /spec\/api/
+  config.include RSpec::Rails::RequestExampleGroup, type: :request, file_path: %r{spec/api}
   config.before do
     I18n.locale = I18n.default_locale
     if defined?(Fabrication)
@@ -21,7 +21,7 @@ RSpec.configure do |config|
 
   config.bisect_runner = :shell
   config.order = :defined
-  if Rails.version.to_f >= 7.1
+  if config.respond_to?(:fixture_paths)
     config.fixture_paths ||= []
     config.fixture_paths << "#{::Rails.root}/spec/fixtures"
   else
@@ -57,7 +57,7 @@ RSpec.configure do |config|
   end
 
   config.around(:each, :timeout) do |example|
-    time = 10 unless time.kind_of?(Numeric)
+    time = 10 unless time.is_a?(Numeric)
     Timeout.timeout(time) do
       example.run
     end

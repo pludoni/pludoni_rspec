@@ -1,15 +1,10 @@
 require "pludoni_rspec/version"
 require 'json'
 
-# rubocop:disable Rails/FilePath
 module PludoniRspec
   class Config
     class << self
-      attr_accessor :destroy_headless
-      attr_accessor :wrap_js_spec_in_headless
-      attr_accessor :chrome_arguments
-      attr_accessor :capybara_timeout
-      attr_accessor :coverage_enabled
+      attr_accessor :destroy_headless, :wrap_js_spec_in_headless, :chrome_arguments, :capybara_timeout, :coverage_enabled
     end
     # self.chrome_driver_version = "2.36"
     self.destroy_headless = false
@@ -18,6 +13,7 @@ module PludoniRspec
     self.capybara_timeout = ENV['CI'] == '1' ? 30 : 5
     self.coverage_enabled = true
   end
+
   def self.run
     ENV["RAILS_ENV"] ||= 'test'
     coverage! if Config.coverage_enabled
@@ -29,6 +25,8 @@ module PludoniRspec
     require 'pludoni_rspec/cuprite'
     require 'pludoni_rspec/freeze_time'
     require 'pludoni_rspec/shared_context'
+    require 'pludoni_rspec/formatter'
+    RSpec.configuration.default_formatter = 'EnhancedDocumentationFormatter'
     if defined?(VCR)
       require 'pludoni_rspec/vcr'
     end
@@ -43,7 +41,7 @@ module PludoniRspec
     if File.exist?('coverage/.resultset.json') && (
         File.ctime('coverage/.resultset.json') < (Time.now - 900) ||
         (JSON.parse(File.read('coverage/.resultset.json')).keys.length > 4)
-    )
+      )
       File.unlink('coverage/.resultset.json')
       if File.exist?('coverage/.resultset.json.lock')
         File.unlink('coverage/.resultset.json.lock')
