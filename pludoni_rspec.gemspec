@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "vcr", ">= 3.0.0"
   # spec.add_dependency "geckodriver-helper", ">= 0.23.0"
   spec.add_dependency 'capybara', ">= 3.13.2"
-  spec.add_dependency 'fuubar', '>= 2.3.1'
+  # spec.add_dependency 'fuubar', '>= 2.3.1'
   spec.add_dependency 'headless', ">= 2.3.1"
   spec.add_dependency 'pry-rails'
   spec.add_dependency 'puma'

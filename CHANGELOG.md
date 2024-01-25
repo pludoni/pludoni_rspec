@@ -1,3 +1,19 @@
+### 0.20
+
+- Added new default custom formatter instead of fuubar - Documentation based,
+  but prints out duration and file paths of the group
+- Disable Smooth Scrolling for Cuprite
+- Fix: Rails 7.1 `fixture_path` or `fixture_paths`
+- Add: 3 new global helpers: 
+    - ``only_run_when_single_spec_and_local!``
+      skip this example, only run if you are working on it and skip it later like special customers bugs etc., 
+      long running crawler etc. that you want to run occasionally
+    - ``local!``
+      For System specs:
+      prints the instructions to open the current page in your local browser if
+      you run the specs remotely, create a SSH tunnel to the server during
+      system specs and open the brOwser on your local machine
+
 ### 0.11
 
 - Rails 7.1 fixture_paths deprecation

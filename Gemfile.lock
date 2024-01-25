@@ -1,10 +1,9 @@
 PATH
   remote: .
   specs:
-    pludoni_rspec (0.11)
+    pludoni_rspec (0.2)
       capybara (>= 3.13.2)
       cuprite
-      fuubar (>= 2.3.1)
       headless (>= 2.3.1)
       pry-rails
       puma
@@ -37,9 +36,6 @@ GEM
       concurrent-ruby (~> 1.1)
       webrick (~> 1.7)
       websocket-driver (>= 0.6, < 0.8)
-    fuubar (2.5.1)
-      rspec-core (~> 3.0)
-      ruby-progressbar (~> 1.4)
     headless (2.3.1)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -69,7 +65,6 @@ GEM
     rspec-support (3.12.0)
     rspec_junit_formatter (0.6.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    ruby-progressbar (1.13.0)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
