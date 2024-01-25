@@ -36,7 +36,11 @@ class EnhancedDocumentationFormatter < RSpec::Core::Formatters::DocumentationFor
   end
 
   def duration(example)
-    time = example.metadata[:execution_result][:run_time]
+    time = if example.respond_to?(:execution_result)
+             example.execution_result.run_time
+           else
+             example.metadata[:execution_result][:run_time]
+           end
     if time < self.class.threshold_for_good
       RSpec::Core::Formatters::ConsoleCodes.wrap("#{(time * 1000).round}ms", :black)
     elsif time > self.class.threshold_for_bad
