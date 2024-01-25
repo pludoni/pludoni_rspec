@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pludoni_rspec (0.2)
+    pludoni_rspec (0.20)
       capybara (>= 3.13.2)
       cuprite
       headless (>= 2.3.1)
