@@ -1,3 +1,8 @@
+### 0.22
+
+- Rails 8.1: `ActiveSupport::CurrentAttributes.reset_all` was removed.
+  Switched to `clear_all` (available since Rails 7.0).
+
 ### 0.20
 
 - Added new default custom formatter instead of fuubar - Documentation based,

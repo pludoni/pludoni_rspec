@@ -1,6 +1,6 @@
 RSpec.configure do |config|
   config.before(:each) do
-    ActiveSupport::CurrentAttributes.reset_all if defined?(ActiveSupport::CurrentAttributes)
+    ActiveSupport::CurrentAttributes.clear_all if defined?(ActiveSupport::CurrentAttributes)
   end
   config.example_status_persistence_file_path = 'tmp/rspec.failed.txt'
   config.expect_with :rspec do |expectations|
