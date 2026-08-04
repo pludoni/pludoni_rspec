@@ -1,3 +1,8 @@
+### 0.23
+
+- SimpleCov 1.0: `add_filter` was deprecated. Switched to `skip`
+  (same arguments, same behavior).
+
 ### 0.22
 
 - Rails 8.1: `ActiveSupport::CurrentAttributes.reset_all` was removed.

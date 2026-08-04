@@ -54,7 +54,7 @@ module PludoniRspec
       SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
     end
     SimpleCov.start 'rails' do
-      add_filter do |source_file|
+      skip do |source_file|
         source_file.lines.count < 10
       end
       add_group "Long files" do |src_file|
