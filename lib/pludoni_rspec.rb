@@ -1,5 +1,6 @@
 require "pludoni_rspec/version"
 require 'json'
+require 'benchmark'
 
 module PludoniRspec
   class Config

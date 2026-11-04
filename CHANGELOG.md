@@ -1,3 +1,9 @@
+### 0.24
+
+- `benchmark` is required explicitly (and declared as dependency). It was loaded
+  implicitly by mini_magick 4; with mini_magick 5 the Vite precompile for system specs
+  failed with `uninitialized constant Benchmark`.
+
 ### 0.23
 
 - SimpleCov 1.0: `add_filter` was deprecated. Switched to `skip`
