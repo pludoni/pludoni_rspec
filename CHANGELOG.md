@@ -1,3 +1,8 @@
+### 0.25
+
+- SimpleCov 0.x works again: `skip` is only used when available (SimpleCov 1.0),
+  otherwise `add_filter`. 0.23/0.24 raised `undefined method 'skip'` with simplecov 0.22.
+
 ### 0.24
 
 - `benchmark` is required explicitly (and declared as dependency). It was loaded

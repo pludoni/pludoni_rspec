@@ -55,9 +55,9 @@ module PludoniRspec
       SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
     end
     SimpleCov.start 'rails' do
-      skip do |source_file|
-        source_file.lines.count < 10
-      end
+      # SimpleCov 1.0 benennt add_filter in skip um; Projekte mit 0.x weiter unterstützen
+      short_file = ->(source_file) { source_file.lines.count < 10 }
+      respond_to?(:skip) ? skip(&short_file) : add_filter(&short_file)
       add_group "Long files" do |src_file|
         src_file.lines.count > 150
       end
